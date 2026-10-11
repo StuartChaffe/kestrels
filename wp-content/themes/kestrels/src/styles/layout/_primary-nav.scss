@@ -1,0 +1,16 @@
+.primary-nav {
+	display: flex;
+	gap: 1.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.primary-nav__link {
+	color: var(--color-text-reversed);
+	text-decoration: none;
+
+	&[aria-current="page"] {
+		text-decoration: underline;
+	}
+}

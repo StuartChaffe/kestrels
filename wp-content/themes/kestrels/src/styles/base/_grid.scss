@@ -1,0 +1,168 @@
+// picnic css grid | picnicss.com | MIT License
+$flexgrid-separation: .6em !default;
+$flexgrid-gutter: 30px !default;
+
+$flexgrid-gutter: $flexgrid-separation !default;
+$flexgrid-gutter-vertical: 15px !default;
+$flexgrid-gutter-horizontal: $flexgrid-gutter !default;
+
+$flexgrid-sizes: 400 500 600 700 800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 !default;
+$flexgrid-children: $flexgrid-sizes !default;
+$flexgrid-off: $flexgrid-sizes !default;
+
+$flexgrid-count: one two three four five six seven eight nine ten eleven twelve !default;
+$flexgrid-count-sizes: (
+  one: 100%,
+  two: 50%,
+  three: 33.33333%,
+  four: 25%,
+  five: 20%,
+  six: 16.66666%,
+  seven: 14.28571%,
+  eight: 12.5%,
+  nine: 11.11111%,
+  ten: 10%,
+  eleven: 9.09091%,
+  twelve: 8.33333%
+);
+$flexgrid-part: full half third two-third fourth three-fourth fifth two-fifth three-fifth four-fifth sixth five-sixth tenth !default;
+$flexgrid-part-sizes: (
+  full: 100%,
+  half: 50%,
+  third: 33.33333%,
+  two-third: 66.66666%,
+  fourth: 25%,
+  three-fourth: 75%,
+  fifth: 20%,
+  two-fifth: 40%,
+  three-fifth: 60%,
+  four-fifth: 80%,
+  sixth: 16.66666%,
+  five-sixth: 83.33333334%,
+  tenth: 10%
+);
+$flexgrid-offpart: none half third two-third fourth three-fourth fifth two-fifth three-fifth four-fifth sixth tenth twelth !default;
+$flexgrid-offpart-sizes: (
+  half: 50%,
+  third: 33.33333%,
+  two-third: 66.66666%,
+  fourth: 25%,
+  three-fourth: 75%,
+  fifth: 20%,
+  two-fifth: 40%,
+  three-fifth: 60%,
+  four-fifth: 80%,
+  sixth: 16.66666%,
+  tenth: 10%,
+  twelth: 8.3333333333%,
+  none: 0
+);
+
+
+@function in($list, $var) {
+  @return (false != index($list, $var));
+}
+
+.flex {
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% + #{$flexgrid-gutter-horizontal});
+  margin-left: -$flexgrid-gutter-horizontal;
+  transition: all .3s ease;
+}
+
+.flex > * {
+  box-sizing: border-box;
+  flex: 1 1 auto; /* Default for IE10 bug */
+  padding-bottom: $flexgrid-gutter-vertical;
+  padding-left: $flexgrid-gutter-horizontal;
+}
+
+.flex {
+  &[class*="one"],
+  &[class*="two"],
+  &[class*="three"],
+  &[class*="four"],
+  &[class*="five"],
+  &[class*="six"],
+  &[class*="seven"],
+  &[class*="eight"],
+  &[class*="nine"],
+  &[class*="ten"],
+  &[class*="eleven"],
+  &[class*="twelve"] {
+    > * {
+      flex-grow: 0;
+    }
+  }
+}
+
+.flex.grow > * {
+  flex-grow: 1;
+}
+
+.center {
+  justify-content: center;
+}
+
+@each $count in $flexgrid-count {
+  .#{$count} > * {
+    width: map-get($flexgrid-count-sizes, $count);
+  }
+}
+
+@each $i in $flexgrid-sizes {
+  @media all and (min-width: unquote($i + 'px')) {
+    @each $count in $flexgrid-count {
+      .#{$count}-#{$i} > * {
+        width: map-get($flexgrid-count-sizes, $count);
+      }
+    }
+  }
+}
+
+
+// Children sizing
+@each $part in $flexgrid-part {
+  .#{$part} {
+    width: map-get($flexgrid-part-sizes, $part);
+  }
+}
+.none { display: none; }
+
+
+@each $i in $flexgrid-sizes {
+  @media all and (min-width: unquote($i + 'px')) {
+    @each $part in $flexgrid-part {
+      .#{$part}-#{$i} {
+        display: block;
+        width: map-get($flexgrid-part-sizes, $part);
+      }
+    }
+  }
+}
+@each $i in $flexgrid-children {
+  @media all and (min-width: unquote($i + 'px')) {
+    .none-#{$i} { display: none; }
+  }
+}
+
+
+
+@each $part in $flexgrid-offpart {
+  .off-#{$part} {
+    margin-left: map-get($flexgrid-offpart-sizes, $part);
+  }
+}
+
+
+@each $i in $flexgrid-sizes {
+  @media all and (min-width: unquote($i + 'px')) {
+    @each $part in $flexgrid-offpart {
+      .off-#{$part}-#{$i} {
+        margin-left: map-get($flexgrid-offpart-sizes, $part);
+      }
+    }
+  }
+}

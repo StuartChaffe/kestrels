@@ -1,0 +1,14 @@
+{
+    "name": "acf/image-gallery",
+    "title": "Image Gallery",
+    "description": "",
+    "category": "custom-blocks",
+    "icon": "admin-generic",
+    "keywords": [],
+    "acf": {
+        "blockVersion": 3,
+        "mode": "preview",
+        "renderTemplate": "image-gallery.php"
+    },
+    "align": "full"
+}

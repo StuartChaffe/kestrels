@@ -1,0 +1,42 @@
+# Ignore everything in the root except the "wp-content" directory.
+/*
+!.gitignore
+!.editorconfig
+!wp-content/
+
+.claude/settings.local.json
+.claude/worktrees/
+
+# Ignore everything in the "wp-content" directory, except the "plugins" and "themes" directories.
+wp-content/*
+!wp-content/plugins/
+!wp-content/themes/
+
+# Ignore everything in the "plugins" directory, except the plugins you specify
+wp-content/plugins/*
+
+# Ignore everything in the "themes" directory, except the themes you specify
+wp-content/themes/*
+!wp-content/themes/kestrels/
+
+# Ignore compiled assets
+wp-content/themes/kestrels/assets/*
+
+# Make sure these files are hidden
+.sass-cache/*
+.DS_Store
+.env
+node_modules
+*.log
+*.sql
+*.sqlite
+*.bak
+Thumbs.db
+.nova
+package-lock.json
+yarn.lock
+
+# Favicons
+!favicon.svg
+!favicon.png
+!apple-touch-icon.png

@@ -1,0 +1,18 @@
+.page-header {
+	padding-top: var(--spacing-xl);
+	padding-bottom: var(--spacing-xl);
+	background-color: var(--color-primary);
+	color: var(--color-text-reversed);
+}
+
+.page-header__title {
+	color: var(--color-text-reversed);
+}
+
+.page-header__description {
+	margin-top: var(--spacing);
+}
+
+.page-header__button {
+	margin-top: var(--spacing-l);
+}

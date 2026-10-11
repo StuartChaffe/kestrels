@@ -1,0 +1,33 @@
+{
+  "name": "origin",
+  "version": "1.0.0",
+  "description": "WordPress boilerplate",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "development": "vite build --mode development",
+    "watch": "NODE_OPTIONS=--no-deprecation vite build --watch",
+    "production": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcjenkins/origin.git"
+  },
+  "keywords": [],
+  "author": "Marc Jenkins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcjenkins/origin/issues"
+  },
+  "homepage": "https://github.com/marcjenkins/origin#readme",
+  "devDependencies": {
+    "browser-sync": "^3.0.4",
+    "sass": "^1.57.1",
+    "vite": "^8.0.12",
+    "vite-plugin-browser-sync": "^7.0.0"
+  },
+  "dependencies": {
+    "swiper": "^12.1.4"
+  }
+}

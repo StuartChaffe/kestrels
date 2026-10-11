@@ -1,0 +1,100 @@
+.btn {
+	--button-bg: var(--color-primary);
+	--button-color: var(--color-text-reversed);
+	--button-hover-bg: var(--color-primary-darker);
+	--button-hover-color: var(--color-text-reversed);
+	--button-radius: 4px;
+	--button-border-width: 2px;
+	--button-border-color: var(--button-bg);
+	--button-hover-border-color: var(--button-hover-bg);
+	--button-outline-width: 1.5px;
+	--button-outline-style: dashed;
+	--button-outline-color: var(--color-grey-dark);
+	--button-outline-offset: 0.1lh;
+
+	display: inline-flex;
+	align-items: center;
+	gap: var(--button-gap, 0.5em);
+	padding: var(--button-padding, 0.8em 1.6em);
+
+	background: var(--button-bg);
+	color: var(--button-color);
+
+	border: var(--button-border-width) solid var(--button-border-color);
+	border-radius: var(--button-radius);
+
+	text-decoration: none;
+	font-weight: var(--font-weight-semi);
+	font-size: var(--text-size-s);
+	line-height: 1;
+
+	appearance: none;
+	cursor: pointer;
+	transition: background var(--transition-base), color var(--transition-base);
+
+	&:hover {
+		background: var(--button-hover-bg);
+		color: var(--button-hover-color);
+		border-color: var(--button-hover-border-color);
+		text-decoration: none;
+	}
+
+	&:focus-visible {
+		outline-width: var(--button-outline-width);
+		outline-style: var(--button-outline-style);
+		outline-color: var(--button-outline-color);
+		outline-offset: var(--button-outline-offset);
+	}
+
+	&:active {
+		transform: scale(99%);
+	}
+}
+
+.btn svg {
+	height: var(--button-icon-size, 1.2cap);
+	width: auto;
+	flex: none;
+}
+
+.btn--secondary {
+	--button-bg: var(--color-secondary);
+	--button-color: var(--color-text-reversed);
+	--button-hover-bg: var(--color-secondary-darker);
+}
+
+.btn--outline {
+	--button-bg: transparent;
+	--button-color: var(--color-text-dark);
+	--button-hover-bg: var(--color-text-dark);
+	--button-hover-color: var(--color-text-reversed);
+	--button-border-width: 2px;
+	--button-border-color: currentColor;
+}
+
+.btn-group {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--spacing);
+}
+
+.btn--link {
+	--button-bg: transparent;
+	--button-color: var(--color-text-link);
+	--button-hover-bg: transparent;
+	--button-hover-color: var(--color-text-hover);
+
+	padding: 0;
+
+	&::after {
+		content: '→';
+		text-decoration: none;
+		display: inline-block;
+		transition: transform var(--transition-base);
+	}
+
+	&:hover::after {
+		transform: translateX(0.25em);
+	}
+}

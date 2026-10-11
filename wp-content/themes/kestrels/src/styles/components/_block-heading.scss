@@ -1,0 +1,10 @@
+.block-heading {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing);
+	margin-bottom: var(--spacing-l);
+}
+
+.block-heading__actions {
+	margin-left: auto;
+}

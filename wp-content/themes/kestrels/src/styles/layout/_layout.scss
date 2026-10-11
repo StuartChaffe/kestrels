@@ -1,0 +1,20 @@
+// =============================================================================
+// Site
+// =============================================================================
+
+.global-container {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.container {
+	margin: 0 auto;
+	padding: 0 1em;
+	width: 100%;
+	max-width: var(--container-width);
+}
+
+.container--s {
+	max-width: var(--content-width);
+}

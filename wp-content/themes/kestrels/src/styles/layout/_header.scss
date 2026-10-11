@@ -1,0 +1,38 @@
+.site-header {
+	background: var(--color-primary);
+	display: flex;
+	justify-content: space-between;
+}
+
+.site-header__inner {
+	@extend .container;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+.site-header__logo img {
+	display: block;
+	height: 70px;
+	width: 73px;
+}
+
+.site-header__nav {
+	display: none;
+
+	@include mq(medium) {
+		display: block;
+	}
+}
+
+.site-header__menu-btn {
+	background: black;
+	color: white;
+	border: 0;
+
+	@include mq(medium) {
+		display: none;
+	}
+}

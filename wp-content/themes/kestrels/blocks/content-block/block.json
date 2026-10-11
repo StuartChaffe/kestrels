@@ -1,0 +1,14 @@
+{
+    "name": "acf/content-block",
+    "title": "Content Block",
+    "description": "",
+    "category": "custom-blocks",
+    "icon": "editor-alignleft",
+    "keywords": ["content", "text"],
+    "acf": {
+        "blockVersion": 3,
+        "mode": "auto",
+        "renderTemplate": "content-block.php"
+    },
+    "align": "full"
+}

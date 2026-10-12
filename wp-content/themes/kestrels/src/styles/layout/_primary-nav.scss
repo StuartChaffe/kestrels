@@ -1,16 +1,24 @@
 .primary-nav {
 	display: flex;
-	gap: 1.5rem;
+	// gap: 1.5rem;
 	list-style: none;
 	margin: 0;
 	padding: 0;
-}
-
-.primary-nav__link {
-	color: var(--color-text-reversed);
-	text-decoration: none;
-
-	&[aria-current="page"] {
-		text-decoration: underline;
+	&__link {
+		--button-padding: 0.8rem 1.2rem;
+		color: var(--color-text-base);
+		font-size: var(--text-size-s);
+		padding: var(--button-padding);
+		text-decoration: none;
+		&:hover {
+			color: var(--color-text-base);
+			background-color: white;
+			text-decoration: none;
+		}
+	
+	
+		&[aria-current="page"] {
+			font-weight: var(--font-weight-bold);
+		}
 	}
 }

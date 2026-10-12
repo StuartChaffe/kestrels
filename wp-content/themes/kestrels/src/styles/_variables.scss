@@ -5,38 +5,26 @@
 	
 	--font-mono: DM Mono, monospace;
 
-	--font-weight-light: 100;
+	// --font-weight-light: 100;
 	--font-weight-normal: 400;
-	--font-weight-semi: 600;
-	--font-weight-bold: 700;
+	// --font-weight-semi: 600;
+	--font-weight-bold: 900;
 	--font-weight-heavy: 900;
 
-	--text-size-3xl: 3.2rem;
-	--text-size-2xl: 2rem;
-	--text-size-xl: 1.8rem;
-	--text-size-l: 1.5rem;
-	--text-size-m: 1.3rem;
-	--text-size-base: 1rem;
-	--text-size-s: 0.9rem;
-	--text-size-xs: 0.8rem;
-
-	--leading-tight: 1.15;
+	--leading-tight: 1;
 	--leading-fine: 1.4;
 	--leading-base: 1.55;
-	--leading-loose: 1.7;
+	--leading-loose: 1.2;
 
 	--heading-letter-spacing: -0.015em;
 
-	--color-grey-dark: #6a6a6a;
-	--color-grey: #ddd;
-	--color-grey-light: #efefef;
-
 	--color-primary: #FFE900;
 	--color-secondary: #1C1C1C;
+	--color-tertiary: #FFFFFF;
 
 	--color-text-base: #1C1C1C;
 	--color-text-reversed: #fff;
-	--color-text-link: #fff;
+	--color-text-link: var(--color-text-base);
 	--color-text-hover: var(--color-primary);
 
 	--color-facebook: #3B5998;
@@ -46,10 +34,10 @@
 	--color-linkedin: #0077B5;
 
 	--body-background-color: var(--color-primary);
-
-
-	--radius-s: 8px;
-	--radius: 16px;
+	
+	--radius-s: 6px;
+	--radius: 30px;
+	--radius-l: 50px;
 
 	--spacing-xxl: 3em;
 	--spacing-xl: 2em;
@@ -58,11 +46,13 @@
 	--spacing-s: 0.5em;
 	--spacing-xs: 0.25em;
 
-	--gutter: var(--spacing);
-	--gutter-l: var(--spacing-xl);
+	--gutter: 1rem;
+	--gutter-s: 0.625rem;
+	--gutter-l: 3.125rem;
 
-	--container-width: 75rem;
+	--container-width: 82.5rem;
 	--container-width-l: 100rem;
+	--container-width-s: 43.75rem;
 	--content-width: 50rem;
 
 	--transition-base: 250ms ease;
@@ -76,4 +66,32 @@
 	--z-navigation: 500;
 	--z-nav-overlay: 600;
 	--z-modal: 700;
+
+	--text-size-3xl: 3.2rem;
+	--text-size-2xl: 2rem;
+	--text-size-xl: 1.8rem;
+	--text-size-l: 1.5rem;
+	--text-size-m: 1.3rem;
+	--text-size-base: 1rem;
+	--text-size-s: 0.9rem;
+	--text-size-xs: 0.8rem;
+	--wp--preset--font-size--small: var(--text-size-s);
+	--wp--preset--font-size--medium: var(--text-size-m);
+	--wp--preset--font-size--large: var(--text-size-l);
+	--wp--preset--font-size--x-large: var(--text-size-xl);
+
+	@include mq(xlarge) {
+		--text-size-3xl: 70px; // H1
+		--text-size-2xl: 50px; // H2
+		--text-size-xl: 40px; // H3
+		--text-size-l: 25px; // H4
+		--text-size-m: 20px; // H5
+		--text-size-base: 1.25rem; // 20px
+		--text-size-s: 1.125rem; // 18px
+		--text-size-xs: 0.75rem; // 12px
+		--wp--preset--font-size--small: var(--text-size-s);
+		--wp--preset--font-size--medium: var(--text-size-m);
+		--wp--preset--font-size--large: var(--text-size-l);
+		--wp--preset--font-size--x-large: var(--text-size-xl);
+	}
 }

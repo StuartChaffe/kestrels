@@ -56,3 +56,81 @@ if (!function_exists('dump_exit')) {
         exit;
     }
 }
+
+
+
+function my_login_logo() { ?>
+	<style type="text/css">
+		#login h1 a, .login h1 a {
+			background-image: url('<?php echo get_stylesheet_directory_uri(); ?>/src/images/logo.svg');
+			height: 63px;
+			width: 198px;
+			background-size: 198px 63px;
+			background-repeat: no-repeat;
+		}
+		.wp-core-ui .button-primary {
+			/* background: #FFDA42 !important;
+			background-color: #FFDA42!important;
+			color: #292545 !important;
+			border: 0 !important; */
+			border-radius: 6px !important;
+			/* padding: 0.5rem 1rem; */
+		}
+		body.login {
+			background: #F2F1EC;
+			background-color: #F2F1EC;
+		}
+		.login form {
+			/* padding: 0px !important;
+			background: transparent !important; */
+			padding: 30px !important;
+			border-radius: 30px;
+			border: 0 !important;
+			box-shadow: none !important;
+		}
+
+		/* .wp-core-ui .button.button-large {
+			padding: 5px 40px !important;
+			border-radius: 0px;
+			font-size: 16px !important;
+		}
+		a {
+			color: #000 !important;
+		}
+		.privacy-policy-page-link {
+			display: none;
+		}
+		.login-action-login {
+			display: flex;
+    		flex-direction: column;
+			background-color: #F3F3F3 !important;
+		}
+		.login label {
+			font-size: 16px !important;
+		}
+		.login form {
+			padding: 0px !important;
+			background: transparent !important;
+			border: 0 !important;
+			box-shadow: none !important;
+		}
+		#login {
+			padding: 0 !important;
+		}
+		.login #nav,
+		.login #backtoblog {
+			padding: 0 !important;
+		}
+		#login input[type=text],
+		#login input[type=password] {
+			border-radius: 0 !important;
+			border: 0 !important;
+			padding: 10px 10px !important;
+			box-shadow: none !important;
+		}
+		.login .button.wp-hide-pw .dashicons {
+			top: 10px !important;
+		} */
+	</style>
+<?php }
+add_action( 'login_enqueue_scripts', 'my_login_logo' );

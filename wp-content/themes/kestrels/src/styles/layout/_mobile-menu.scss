@@ -17,6 +17,77 @@ body.nav-open {
 	@include mq(medium) {
 		display: none;
 	}
+
+	&__nav {
+		margin: 1.5rem;
+		padding-top: 90px;
+		padding-bottom: 3rem;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		a {
+			color: var(--text-base);
+		}
+	}
+}
+
+.mobile-nav {
+	padding-left: 0;
+	margin: 0;
+	li {
+		width: 100%;
+		padding: 0;
+		position: relative;
+		a {
+			font-size: var(--text-size-m);
+			display: flex;
+			width: 100%;
+			border-bottom: 1px solid rgba(239, 239, 239, 1);
+			color: var(--color-text-base);
+			padding: 1rem 0;
+			font-weight: var(--font-weight-semi);
+			text-decoration: none;
+			letter-spacing: 0;
+			&:hover {
+				color: var(--color-text-base);
+			}
+		}
+		.dropdown-button {
+			border: 0;
+			appearance: none;
+			cursor: pointer;
+			padding: 1rem 1.25rem;
+			background-color: var(--color-primary);
+			position: absolute;
+			right: 0;
+			top: 0;
+			height: auto;
+			content: '↓';
+			color: white;
+			// transform: translateY(-1px);
+			&:hover {
+				cursor: pointer;
+			}
+		}
+		.dropdown-button.is-active {
+			content: '↑';
+			transform: rotate(180deg);
+			background-color: var(--color-primary);
+			&:hover {
+				color: white;
+			}
+		}
+	}
+	&__sub-menu {
+		display: none;
+		// background-color: var(--color-light-grey);
+		a {
+			padding-left: 1rem;
+		}
+		.sub-menu a {
+			padding-left: 2rem;
+		}
+	}
 }
 
 .mobile-menu.is-toggled {

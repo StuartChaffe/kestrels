@@ -5,14 +5,16 @@
 }
 
 .site-header__inner {
-	@extend .container;
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding-top: 2rem;
 	padding-bottom: 2rem;
 }
-
+.site-header__logo {
+	 z-index: 999;
+}
 .site-header__logo img {
 	display: block;
 	height: 70px;

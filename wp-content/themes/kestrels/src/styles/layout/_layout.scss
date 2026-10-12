@@ -10,11 +10,33 @@
 
 .container {
 	margin: 0 auto;
-	padding: 0 1em;
+	padding: 0 1.5rem;
 	width: 100%;
 	max-width: var(--container-width);
+	@include mq(medium) {
+		padding: 0 2rem;
+	}
+}
+.container--l {
+	margin: 0 auto;
+	// padding: 0 1.25rem;
+	width: 100%;
+	max-width: var(--container-width-l);
+}
+.container--s {
+	margin: 0 auto;
+	max-width: var(--container-width-s);
+	// padding: 0 1rem;
+	@include mq(medium) {
+		padding: 0;
+	}
 }
 
-.container--s {
-	max-width: var(--content-width);
+main {
+	> .content-block {
+		margin-top: var(--spacing-xl);
+		@include mq(medium) {
+			margin-top: var(--spacing-xxl) !important;
+		}
+	}
 }

@@ -1,8 +1,8 @@
 <?php
 ?>
 <footer class="site-footer">
-	<div class="site-footer__inner">
-		<p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>.</p>
+	<div class="site-footer__inner container">
+		<p><?php bloginfo('name'); ?></p>
 
 		<?php get_template_part('partials/social-links', null, ['modifier_classes' => 'social-links--footer']); ?>
 

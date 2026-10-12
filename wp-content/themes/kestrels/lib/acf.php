@@ -56,3 +56,12 @@ function _origin_block_slug_for_group( $group ) {
 	}
 	return null;
 }
+
+
+/**
+ * Remove block class
+ */
+add_filter( 'acf/blocks/wrap_frontend_innerblocks', 'acf_should_wrap_innerblocks', 10, 2 );
+	function acf_should_wrap_innerblocks( $wrap, $name ) {
+	return false;
+}

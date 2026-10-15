@@ -1,0 +1,26 @@
+.has-primary-background-color {
+	background-color: var(--color-primary);
+	color: var(--color-secondary);
+	h1, h2, h3, h4, h5, h6, p {
+		color: var(--color-secondary);
+	}
+}
+.has-black-background-color,
+.has-secondary-background-color {
+	background-color: var(--color-secondary);
+}
+.has-secondary-background-color + .has-secondary-background-color {
+	padding-top: 0;
+}
+.content-block.has-secondary-background-color {
+	background-image: url("../../images/bkg-dots-yellow.png");
+	background-position: -100px top, right bottom;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 70%;
+}
+.content-block.has-primary-background-color {
+	background-image: url("../../images/bkg-dots-black.png"), url("../../images/bkg-right-dots-black.png");
+	background-position: left bottom, right bottom;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 20%, 50%;
+}

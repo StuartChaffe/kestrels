@@ -1,0 +1,113 @@
+.page-links {
+	padding-top: var(--spacing-xl);
+	padding-bottom: var(--spacing-xl);
+
+	&__list {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--gap);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		@include mq(small-major) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include mq(medium) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	&__item {
+		margin: 0;
+	}
+
+	&__card {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		overflow: hidden;
+		background-color: #fff;
+		border-radius: var(--radius);
+		color: var(--color-text-reversed);
+		text-decoration: none;
+		padding: var(--spacing-s);
+		transition: background-color var(--transition-base);
+
+		&:is(a):hover {
+			color: var(--color-text-reversed);
+			background-color: var(--color-primary);
+			text-decoration: none;
+			transition: background-color var(--transition-base);
+
+			// .page-links__image {
+			//	opacity: 0.85;
+			// }
+
+			.page-links__arrow {
+				background-color: var(--color-primary);
+			}
+
+			.page-links__arrow::after {
+				transform: rotate(360deg);
+			}
+		}
+	}
+
+	&__media {
+		position: relative;
+	}
+
+	&__arrow {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		background-color: var(--color-tertiary);
+		border-top-left-radius: var(--radius-s);
+		color: var(--color-secondary);
+		transition: background-color var(--transition-base);
+
+		&::after {
+			display: block;
+			width: 13px;
+			height: 13px;
+			content: '';
+			background-color: currentColor;
+			mask: url('../../images/arrow.svg') center / contain no-repeat;
+			transition: transform var(--transition-base);
+		}
+	}
+
+	&__image {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		border-radius: var(--radius-s);
+	}
+
+	&__title {
+		margin: var(--spacing-s) var(--spacing-xs) 0;
+		color: var(--color-text-reversed);
+	}
+
+	&__content {
+		margin: var(--spacing-s) var(--spacing-xs) 0;
+	}
+
+	&__title:last-child,
+	&__content:last-child {
+		margin-bottom: var(--spacing-s);
+	}
+}
+
+.has-background + .page-links {
+	padding-top: 0;
+}

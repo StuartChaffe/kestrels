@@ -1,0 +1,14 @@
+{
+    "name": "acf/page-links",
+    "title": "Page Links",
+    "description": "Grid of image cards linking to selected pages",
+    "category": "custom-blocks",
+    "icon": "grid-view",
+    "keywords": ["links", "cards", "pages"],
+    "acf": {
+        "blockVersion": 3,
+        "mode": "preview",
+        "renderTemplate": "page-links.php"
+    },
+    "align": "full"
+}

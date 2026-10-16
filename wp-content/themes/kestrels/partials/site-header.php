@@ -1,5 +1,5 @@
-<header class="site-header container">
-	<div class="site-header__inner">
+<header class="site-header">
+	<div class="site-header__inner container">
 		<a class="site-header__logo" href="<?php echo home_url(); ?>" aria-label="Home">
 			<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="">
 		</a>

@@ -2,3 +2,20 @@
 	padding-top: var(--spacing-xl);
 	padding-bottom: var(--spacing-xl);
 }
+
+// Gallery overhangs into the next block by half its height.
+// --gallery-overhang is set by src/js/components/image-gallery.js
+.content-block:has(.image-gallery) {
+	display: flow-root; // stop the gallery's negative margin collapsing out of the block
+	padding-bottom: 0;
+
+	.image-gallery {
+		position: relative;
+		z-index: 1;
+		margin-bottom: calc(var(--gallery-overhang, 0px) * -1);
+	}
+
+	+ * {
+		padding-top: calc(var(--gallery-overhang, 0px) + var(--spacing-xl));
+	}
+}

@@ -2,10 +2,13 @@
 @import "utilities/mq";
 @import "utilities/mixins";
 @import "variables";
+@import "utilities/colors";
 
 @import "base/base";
 @import "base/typography";
+@import "base/figures";
 @import "base/gutenberg";
+@import "base/tables";
 
 @import "layout/layout";
 

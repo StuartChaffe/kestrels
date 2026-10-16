@@ -10,11 +10,8 @@
             "duotone": [],
             "palette": [
                 { "name": "White",      "slug": "white",      "color": "#ffffff" },
-                { "name": "Black",      "slug": "black",      "color": "#000000" },
-                { "name": "Primary",    "slug": "primary",    "color": "#59BACC" },
-                { "name": "Secondary",  "slug": "secondary",  "color": "#58AD69" },
-                { "name": "Tertiary",   "slug": "tertiary",   "color": "#FFBC49" },
-                { "name": "Quaternary", "slug": "quaternary", "color": "#E2574C" }
+                { "name": "Black",      "slug": "secondary",  "color": "#1C1C1C" },
+                { "name": "Yellow",    	"slug": "primary",    "color": "#FFE900" }
             ]
         },
         "layout": {
@@ -30,7 +27,7 @@
         },
         "typography": {
             "customFontSize": false,
-            "defaultFontSizes": false,
+            "defaultFontSizes": true,
             "dropCap": false
         }
     }

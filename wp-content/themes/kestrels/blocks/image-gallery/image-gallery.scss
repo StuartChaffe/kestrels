@@ -1,52 +1,117 @@
 .image-gallery {
-    padding-top: var(--spacing-xl);
-    padding-bottom: var(--spacing-xl);
+	margin-top: var(--spacing-l);
+	// padding-bottom: var(--spacing-xl);
+	background-color: var(--color-tertiary);
+	padding: var(--spacing-s) !important;
+	border-radius: var(--radius);
 
-    &__title {
-        margin-bottom: var(--spacing-l);
-    }
+	&__title {
+		margin-bottom: var(--spacing-l);
+	}
 
-    &__swiper {
-        --swiper-theme-color: var(--color-primary);
-        --swiper-navigation-size: 1.5rem;
-        padding-bottom: var(--spacing-xl) !important;
+	&__swiper {
+		// Keep in sync with spaceBetween in src/js/components/image-gallery.js
+		--gallery-gap: 16px;
+		// How much of the next image shows beside a landscape image
+		--gallery-peek: 200px;
+		// Landscape aspect ratio used to set the row height (width / height)
+		--gallery-ratio: 3 / 2;
+		--swiper-navigation-size: 44px;
+		--swiper-navigation-sides-offset: var(--spacing-s);
+		container-type: inline-size;
 
-        .swiper-button-prev,
-        .swiper-button-next {
-            opacity: 0;
-            transition: opacity var(--transition-base);
-        }
+		.swiper-button-prev,
+		.swiper-button-next {
+			background-color: var(--color-primary);
+			border: 0;
+			border-radius: 50px;
+			color: var(--color-secondary);
+			opacity: 0;
+			transition: opacity var(--transition-base), background-color var(--transition-base);
 
-        &:hover {
-            .swiper-button-prev,
-            .swiper-button-next {
-                opacity: 1;
-            }
-        }
-    }
+			&::after {
+				display: block;
+				width: 13px;
+				height: 13px;
+				content: '';
+				background-color: currentColor;
+				mask: url('../../images/arrow.svg') center / contain no-repeat;
+			}
 
-    &__slide {
-    }
+			&:hover {
+				background-color: var(--color-tertiary);
+			}
 
-    &__figure {
-        margin: 0;
-    }
+			&:focus-visible {
+				opacity: 1;
+			}
 
-    &__image {
-        display: block;
-        width: 100%;
-        height: auto;
-        border-radius: var(--radius-s);
-    }
+			&.swiper-button-disabled {
+				opacity: 0;
+			}
+		}
 
-    &__caption {
-        margin-top: var(--spacing-s);
-        font-size: var(--text-size-s);
-        color: var(--color-grey-dark);
-        text-align: center;
-    }
+		// arrow.svg points down-right, so rotate it to point left / right
+		.swiper-button-prev::after {
+			transform: rotate(135deg);
+		}
+
+		.swiper-button-next::after {
+			transform: rotate(-45deg);
+		}
+
+		// Beat Swiper's .swiper-slide { width: 100% }, which loads after this file
+		.image-gallery__slide {
+			width: auto;
+		}
+
+		&:hover {
+			.swiper-button-prev:not(.swiper-button-disabled),
+			.swiper-button-next:not(.swiper-button-disabled) {
+				opacity: 1;
+			}
+		}
+	}
+
+
+	&__figure {
+		margin: 0;
+	}
+
+	// Dim images that are only partly in view, and let them be clicked to slide to them
+	&__swiper.swiper-initialized &__slide {
+		transition: opacity var(--transition-base);
+
+		&:not(.is-in-view) {
+			opacity: 0.4;
+			cursor: pointer;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+
+	&__image {
+		display: block;
+		// Row height: a landscape image fills the width minus the gap and peek,
+		// so portrait images are narrower and show more of the next slide
+		width: auto;
+		height: calc((100cqw - var(--gallery-gap) - var(--gallery-peek)) / (var(--gallery-ratio)));
+		border-radius: var(--radius-s);
+	}
+
+	&__caption {
+		// Don't let a long caption make the slide wider than its image
+		width: 0;
+		min-width: 100%;
+		margin-top: var(--spacing-s);
+		font-size: var(--text-size-s);
+		color: var(--color-grey-dark);
+		text-align: center;
+	}
 }
 
 .acf-block-preview .image-gallery__slide:not(:first-child) {
-    display: none;
+	display: none;
 }

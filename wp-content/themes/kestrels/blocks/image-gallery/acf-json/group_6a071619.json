@@ -3,26 +3,6 @@
     "title": "Block\/Image Gallery",
     "fields": [
         {
-            "key": "field_6a07161900001",
-            "label": "Title",
-            "name": "title",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_6a07161900002",
             "label": "Slides",
             "name": "slides",
@@ -42,6 +22,7 @@
             "max": 0,
             "collapsed": "",
             "button_label": "Add Slide",
+            "rows_per_page": 20,
             "sub_fields": [
                 {
                     "key": "field_6a07161900003",
@@ -114,5 +95,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1778849305
+    "modified": 1792096107
 }

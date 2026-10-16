@@ -1,18 +1,40 @@
 p {
-	margin-top: var(--spacing-l);
-	margin-bottom: 0;
+	margin-top: 0;
+	margin-bottom: var(--spacing);
+	line-height: var(--leading-base);
+	text-wrap: pretty;
+	// font-size: var(--text-size-base);
+	&:last-of-type {
+		margin-bottom: 0;
+	}
 }
-
-p.lead {
+p.has-x-large-font-size {
+	font-size: var(--text-size-xl);
+	line-height: var(--leading-fine);
+}
+p.lead,
+p.has-large-font-size {
 	font-size: var(--text-size-l);
+	line-height: var(--leading-fine);
 }
-
+p.medium,
+.medium p,
+p.has-medium-font-size {
+	font-size: var(--text-size-m);
+	line-height: var(--leading-fine);
+}
+p.small,
+.small p,
+p.has-small-font-size {
+	font-size: var(--text-size-s);
+	line-height: var(--leading-base);
+}
 ul,
 ol {
-	list-style: none;
-	margin-top: 1.5rem;
+	// list-style: none;
+	margin-top: 0;
 	margin-bottom: 1.5rem;
-	padding-left: 1em;
+	padding-left: 3rem;
 }
 
 ul ul,
@@ -22,37 +44,84 @@ ol ol {
 	margin-top: 0;
 	margin-bottom: 0;
 }
+.wp-block-list {
+	padding-left: 3.5rem !important;
+	li {
+		margin-bottom: 1rem;
+	}
+}
 
 li p {
 	margin: 0;
 }
 
+ul.style {
+	margin-left: 0;
+	padding-left: 0;
+	list-style-type: none;
+	li {
+		display: flex;
+		position: relative;
+		list-style-type: none;
+		&:before {
+			position: absolute;
+			content: '';
+			display: inline-block;
+			width: 16px;
+			height: 15px;
+			margin-top: 7px;
+			flex: 0 0 34px;
+			left: -26px;
+			// margin-right: 1rem;
+			// background-size: contain;
+			background: url("../../src/images/ul.svg") no-repeat;
+		}
+	}
+}
+
 blockquote {
 	padding-left: 1em;
-	border-left: 4px solid var(--color-text-dark);
+	border-left: 4px solid var(--color-text-base);
+	cite {
+		font-style: normal;
+		color: var(--color-text-base);
+		font-weight: var(--font-weight-bold);
+		font-size: var(--text-size-s);
+		&:before {
+			content: '– ';
+		}
+	}
 }
 
 a {
 	color: var(--color-text-link);
-	text-decoration: none;
+	text-decoration: underline;
 }
 
 a:hover {
 	color: var(--color-text-hover);
 	text-decoration: underline;
 }
-
+.heading-alt, h1 i, h1 em {
+	font-family: var(--font-alt);
+	font-weight: var(--font-weight-normal);
+}
 h1,
 h2,
 h3,
 h4,
 h5 {
-	margin: 0;
+	margin: 0 0 2rem 0;
     font-family: var(--font-heading);
-	line-height: var(--leading-tight);
+	line-height: var(--leading-heading);
 	letter-spacing: var(--heading-letter-spacing);
-	font-weight: var(--font-weight-bold);
+	font-weight: var(--font-weight-heavy);
 	color: var(--heading-color);
+}
+h1 {
+	margin: 2rem 0 3rem 0;
+	line-height: var(--leading-tight);	
+	font-weight: var(--font-weight-semi);
 }
 
 h1, .heading-1 { font-size: var(--text-size-3xl); }

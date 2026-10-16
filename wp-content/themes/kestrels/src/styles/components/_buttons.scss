@@ -1,21 +1,34 @@
-.btn {
+.wp-block-buttons {
+	gap: 0.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: var(--spacing-l);
+	.wp-block-button + .wp-block-button {
+		@include mq(medium) {
+			margin-left: 0.5rem;
+		}
+	}
+}
+.btn, .wp-block-button__link, .wpcf7-submit {
 	--button-bg: var(--color-primary);
 	--button-color: var(--color-text-reversed);
-	--button-hover-bg: var(--color-primary-darker);
+	--button-hover-bg: var(--color-tertiary);
 	--button-hover-color: var(--color-text-reversed);
-	--button-radius: 4px;
-	--button-border-width: 2px;
-	--button-border-color: var(--button-bg);
-	--button-hover-border-color: var(--button-hover-bg);
+	--button-radius: 50px;
+	--button-border-width: 0;
+	--button-border-color: transparent;
+	--button-hover-border-color: transparent;
 	--button-outline-width: 1.5px;
-	--button-outline-style: dashed;
-	--button-outline-color: var(--color-grey-dark);
+	--button-outline-style: solid;
+	--button-outline-color: currentColor;
 	--button-outline-offset: 0.1lh;
-
+	--button-padding: 0.9rem 1.5rem;
+	--button-gap: 0.5em;
+	position: relative;
 	display: inline-flex;
 	align-items: center;
-	gap: var(--button-gap, 0.5em);
-	padding: var(--button-padding, 0.8em 1.6em);
+	gap: var(--button-gap);
+	padding: var(--button-padding);
 
 	background: var(--button-bg);
 	color: var(--button-color);
@@ -25,18 +38,36 @@
 
 	text-decoration: none;
 	font-weight: var(--font-weight-semi);
-	font-size: var(--text-size-s);
+	font-size: var(--text-size-base);
 	line-height: 1;
 
 	appearance: none;
 	cursor: pointer;
 	transition: background var(--transition-base), color var(--transition-base);
 
+	&:after {
+		position: relative;
+		display: block;
+		flex: none;
+		width: 13px;
+		height: 13px;
+		content: '';
+		background-color: currentColor;
+		mask: url('../../images/arrow.svg') center / contain no-repeat;
+		right: 0;
+		transition: transform var(--transition-base);
+	}
+
 	&:hover {
 		background: var(--button-hover-bg);
 		color: var(--button-hover-color);
 		border-color: var(--button-hover-border-color);
 		text-decoration: none;
+		&:after {
+			// transform: translateY(10%) rotate(-45deg);
+			// transform: translate(3px, 3px);
+				transform: rotate(360deg);
+		}
 	}
 
 	&:focus-visible {
@@ -59,8 +90,8 @@
 
 .btn--secondary {
 	--button-bg: var(--color-secondary);
-	--button-color: var(--color-text-reversed);
-	--button-hover-bg: var(--color-secondary-darker);
+	--button-color: var(--color-text-base);
+	--button-hover-bg: var(--color-primary);
 }
 
 .btn--outline {
@@ -81,20 +112,14 @@
 
 .btn--link {
 	--button-bg: transparent;
-	--button-color: var(--color-text-link);
+	--button-color: var(--color-text-base);
 	--button-hover-bg: transparent;
-	--button-hover-color: var(--color-text-hover);
+	--button-hover-color: var(--color-text-base);
 
 	padding: 0;
 
-	&::after {
-		content: '→';
-		text-decoration: none;
-		display: inline-block;
-		transition: transform var(--transition-base);
-	}
 
-	&:hover::after {
-		transform: translateX(0.25em);
+	&:hover:after {
+		transform: rotate(360deg);
 	}
 }

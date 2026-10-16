@@ -20,9 +20,10 @@ function origin_browser_sync_snippet() {
 	}
 	fclose( $connection );
 
+	// The proxy at :3000 injects its own copy, so only add ours if it's missing
 	printf(
-		'<script async src="https://%s:%d/browser-sync/browser-sync-client.js"></script>' . "\n",
-		esc_attr( $host ),
+		'<script>if (!document.querySelector(\'script[src*="browser-sync-client"]\')) { var s = document.createElement("script"); s.async = true; s.src = "https://%s:%d/browser-sync/browser-sync-client.js"; document.body.appendChild(s); }</script>' . "\n",
+		esc_js( $host ),
 		$port
 	);
 }

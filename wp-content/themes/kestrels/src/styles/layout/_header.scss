@@ -38,3 +38,6 @@
 		display: none;
 	}
 }
+.mobile-menu + .has-primary-background-color {
+	padding-top: var(--spacing);
+}

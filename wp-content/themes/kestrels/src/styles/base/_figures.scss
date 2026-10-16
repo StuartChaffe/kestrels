@@ -1,5 +1,6 @@
 figure {
-	margin: 0;
+	margin: var(--spacing) 0;
+	border-radius: var(--radius);
 }
 
 figcaption {
@@ -8,4 +9,14 @@ figcaption {
 
 figcaption p {
 	font-size: var(--text-size-s);
+}
+.wp-block-image {
+	width: 100%;
+	img {
+		padding: var(--spacing-s);
+		border-radius: var(--radius);
+		background: var(--color-tertiary);
+		height: auto;
+		width: 100%;
+	}
 }

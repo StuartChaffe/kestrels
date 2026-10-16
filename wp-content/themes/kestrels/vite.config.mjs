@@ -41,7 +41,7 @@ function fixCssAssetPaths() {
                     .replace(/url\(fonts\//g, 'url(../fonts/')
                     // any path that escapes assets/ and contains /images/ → ../images/
                     .replace(
-                        /url\((['"]?)(?:\.\.\/)+(?:[^/'"]+\/)*images\/([^)'"]+)\1\)/g,
+                        /url\((['"]?)(?:\.\.\/)+(?:[^/'"()]+\/)*images\/([^)'"]+)\1\)/g,
                         'url($1../images/$2$1)'
                     )
             }
@@ -121,6 +121,8 @@ export default defineConfig(({ mode }) => {
                         host: env.VITE_HOST,
                         open: false,
                         logLevel: 'silent',
+                        // Don't mirror clicks/scrolls between tabs — it replays clicks and breaks sliders
+                        ghostMode: false,
                         ...(env.VITE_HTTPS_KEY && env.VITE_HTTPS_CERT ? {
                             https: {
                                 key: env.VITE_HTTPS_KEY,

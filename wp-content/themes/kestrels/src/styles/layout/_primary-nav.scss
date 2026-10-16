@@ -5,13 +5,15 @@
 	margin: 0;
 	padding: 0;
 	&__link {
-		--button-padding: 0.8rem 1.2rem;
-		color: var(--color-text-base);
-		font-size: var(--text-size-s);
+		--button-padding: 0.9rem 1.5rem;
+		color: var(--color-text-reversed);
+		border-radius: 50px;
+		// font-size: var(--text-size-s);
+		font-weight: var(--font-weight-bold);
 		padding: var(--button-padding);
 		text-decoration: none;
 		&:hover {
-			color: var(--color-text-base);
+			color: var(--color-text-reversed);
 			background-color: white;
 			text-decoration: none;
 		}

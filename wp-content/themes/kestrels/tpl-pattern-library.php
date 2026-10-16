@@ -12,7 +12,7 @@
 		font-size: var(--text-size-l);
 		border-bottom: 1px solid var(--color-secondary);
 		padding-bottom: 0.5rem;
-		margin: 3rem 0 1.5rem;
+		margin: 8rem 0 1.5rem;
 	}
 	.pattern-section h3.label {
 		font-size: var(--text-size-xs);
@@ -32,7 +32,7 @@
 		border-radius: var(--radius-s);
 		margin-bottom: 8px;
 		padding: 1rem;
-		border: 1px solid rgba(0,0,0,0.06);
+		border: 1px solid var(--color-text-base);
 	}
 	.color-swatches {
 		display: grid;
@@ -48,7 +48,7 @@
 		min-height: 80px;
 		border-radius: var(--radius-s);
 		margin-bottom: 8px;
-		border: 1px solid rgba(0,0,0,0.06);
+		border: 1px solid var(--color-tertiary);
 	}
 	.color-swatch__label {
 		font-size: 11px;
@@ -81,12 +81,12 @@
 <main class="main content" id="content">
 	<div class="container--s">
 
-		<h1>Pattern Library</h1>
+		<h1 class="u-center"><i>Pattern</i> <br />Library</h1>
 
 		<div class="pattern-section">
 			<h2 class="label">Logos</h2>
 			<h3 class="label">SVG</h3>
-			<div class="pattern-section__logos"><div class="pattern-section__logo has-cream-background-color"><a href="<?php echo content_url(); ?>/uploads/logo.svg" download><img src="<?php echo content_url(); ?>/uploads/logo.svg" alt=""></a></div> <div class="pattern-section__logo has-secondary-background-color"><a href="<?php echo content_url(); ?>/uploads/logo-alt.svg" download><img src="<?php echo content_url(); ?>/uploads/logo-alt.svg" alt=""></a></div></div>
+			<div class="pattern-section__logos"><div class="pattern-section__logo has-primary-background-color"><a href="<?php echo content_url(); ?>/uploads/logo.svg" download><img src="<?php echo content_url(); ?>/uploads/logo.svg" alt=""></a></div> <div class="pattern-section__logo has-secondary-background-color"><a href="<?php echo content_url(); ?>/uploads/logo-alt.svg" download><img src="<?php echo content_url(); ?>/uploads/logo-alt.svg" alt=""></a></div></div>
 
 			<h3 class="label">PNG</h3>
 			<div class="pattern-section__logos"><div class="pattern-section__logo has-primary-background-color"><a href="<?php echo content_url(); ?>/uploads/logo.png" download><img src="<?php echo content_url(); ?>/uploads/logo.png" alt=""></a></div> <div class="pattern-section__logo has-secondary-background-color"><a href="<?php echo content_url(); ?>/uploads/logo-alt.png" download><img src="<?php echo content_url(); ?>/uploads/logo-alt.png" alt=""></a></div> </div>
@@ -115,17 +115,19 @@
 
 		<!-- Typography -->
 		<div class="pattern-section">
-			<h2 class="label">Typography  <a href="https://fonts.google.com/specimen/DM+Sans?preview.script=Latn">DM Sans ⤴</a></h2>
+			<h2 class="label">Typography <a href="https://fonts.google.com/specimen/DM+Sans?preview.script=Latn">DM Sans ⤴</a> <a href="https://fonts.google.com/specimen/Instrument+Serif?preview.layout=grid&preview.script=Latn&query=dm+sans">Instrument Serif ⤴</a></h2>
 
 			<h3 class="label">Headings</h3>
-			<h1>Heading 1 &mdash; The quick brown fox</h1>
+			<h1><i>Welcome</i><br/>
+			Kestrels</h1>
+			<h1 class="heading-alt">Alt Heading</h1>
 			<h2>Heading 2 &mdash; The quick brown fox</h2>
 			<h3>Heading 3 &mdash; The quick brown fox</h3>
 			<h4>Heading 4 &mdash; The quick brown fox</h4>
 			<h5>Heading 5 &mdash; The quick brown fox</h5>
 
 			<h3 class="label">Body</h3>
-			<p class="has-large-font-size"><strong>Lead paragraph</strong>. Vivamus magna. <i>Cras in mi at felis</i> aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend libero at lobortis mollis.</p>
+			<p class="has-medium-font-size"><strong>Lead paragraph</strong>. Vivamus magna. <i>Cras in mi at felis</i> aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend libero at lobortis mollis.</p>
 			<p><strong>Body copy</strong>. Vivamus magna. <i>Cras in mi at felis</i> aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend libero at lobortis mollis. Quisque ultrices, lacus ut interdum varius, nisi nulla <a href="#">link example</a> sollicitudin tortor, ac semper tellus sapien at est.</p>
 			<p class="small"><strong>Second paragraph</strong>. Aliquam erat volutpat. <i>In dui magna</i>, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque ipsum. Nulla ut erat id mauris vulputate elementum.</p>
 
@@ -177,7 +179,6 @@
 				<a href="#" class="btn btn--secondary">Secondary</a>
 				<button class="btn" type="button">Button element</button>
 				<input class="btn" type="button" value="Input button">
-				<a href="#" class="btn btn--outline" style="margin-right: 2rem;">Outline</a>
 				<a href="#" class="btn btn--link">Link</a>
 			</div>
 		</div>

@@ -21,7 +21,9 @@ if ( ! $social || ! array_filter( $social ) ) {
 	<?php if ( $social['facebook_url'] ) : ?>
 		<li class="social-links__item">
 			<a href="<?php echo esc_url( $social['facebook_url'] ); ?>" class="social-links__link" aria-label="Facebook" rel="noopener noreferrer" target="_blank">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+				<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M9.34475 10.0485L9.86302 6.81553H6.62101V4.71751C6.62101 3.83302 7.07387 2.97088 8.52599 2.97088H10V0.218461C10 0.218461 8.66227 0 7.38337 0C4.7132 0 2.96805 1.54835 2.96805 4.35146V6.81553H0V10.0485H2.96805V17.8641C3.56319 17.9535 4.17317 18 4.79455 18C5.41592 18 6.02587 17.9535 6.62101 17.8641V10.0485H9.34475Z" fill="currentColor"/>
+				</svg>
 			</a>
 		</li>
 	<?php endif; ?>

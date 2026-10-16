@@ -20,7 +20,10 @@ $breakpoints: (
 	xxxlarge: 100em
 );
 
-$show-breakpoints: (small, small-major, medium, medium-major, large, xlarge, xxlarge, xxxlarge);
+// Set to true to show the current breakpoint in the top right corner while developing
+$debug-breakpoints: false;
+
+$show-breakpoints: if(sass($debug-breakpoints): (small, small-major, medium, medium-major, large, xlarge, xxlarge, xxxlarge); else: ());
 
 @use 'utilities/mq' with (
   $breakpoints: $breakpoints,

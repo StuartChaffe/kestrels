@@ -3,9 +3,34 @@
 // =============================================================================
 
 .global-container {
+	background-image: url("../../images/bkg-dots-yellow.png"), url("../../images/bkg-bottom-dots-yellow.png");
+	background-position: -100px 100px, right bottom 100px;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 70%;
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	> *:not(section, header, footer, article, iframe) {
+		max-width: var(--container-width-s);
+		margin-left: auto !important;
+		margin-right: auto !important;
+		width: 100%;
+		padding: 0 1.5rem;
+		z-index: 1;
+		// @include mq(medium) {
+		// 	padding: 0 1rem;
+		// }
+	}
+	> h1 {
+		margin: var(--spacing-xl) 0 var(--spacing-l) 0;
+	}
+
+	// If the content doesn't end with a section, space it from the footer.
+	// Set on the last element rather than the footer, which keeps margin-top: auto
+	// to sit at the bottom of short pages.
+	> :not(section, header):has(+ .site-footer) {
+		margin-bottom: var(--spacing-xxl);
+	}
 }
 
 .container {
@@ -26,10 +51,8 @@
 .container--s {
 	margin: 0 auto;
 	max-width: var(--container-width-s);
-	// padding: 0 1rem;
-	@include mq(medium) {
-		padding: 0;
-	}
+	padding: 0 1.5rem;
+	// \
 }
 
 main {

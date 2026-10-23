@@ -11,14 +11,19 @@
 
 	&__swiper {
 		// Keep in sync with spaceBetween in src/js/components/image-gallery.js
-		--gallery-gap: 16px;
+		--gallery-gap: 0px;
 		// How much of the next image shows beside a landscape image
-		--gallery-peek: 200px;
+		--gallery-peek: 0px;
 		// Landscape aspect ratio used to set the row height (width / height)
 		--gallery-ratio: 3 / 2;
 		--swiper-navigation-size: 44px;
 		--swiper-navigation-sides-offset: var(--spacing-s);
 		container-type: inline-size;
+
+		@include mq(medium) {
+			--gallery-gap: 0px;
+			--gallery-peek: 200px;
+		}
 
 		.swiper-button-prev,
 		.swiper-button-next {

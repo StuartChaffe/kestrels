@@ -9,24 +9,24 @@ p {
 	}
 }
 p.has-x-large-font-size {
-	font-size: var(--text-size-xl);
+	font-size: var(--text-size-xl) !important;
 	line-height: var(--leading-fine);
 }
 p.lead,
 p.has-large-font-size {
-	font-size: var(--text-size-l);
+	font-size: var(--text-size-l) !important;
 	line-height: var(--leading-fine);
 }
 p.medium,
 .medium p,
 p.has-medium-font-size {
-	font-size: var(--text-size-m);
+	font-size: var(--text-size-m) !important;
 	line-height: var(--leading-fine);
 }
 p.small,
 .small p,
 p.has-small-font-size {
-	font-size: var(--text-size-s);
+	font-size: var(--text-size-s) !important;
 	line-height: var(--leading-base);
 }
 ul,

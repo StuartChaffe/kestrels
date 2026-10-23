@@ -79,7 +79,7 @@
 			height: 13px;
 			content: '';
 			background-color: currentColor;
-			mask: url('../../images/arrow.svg') center / contain no-repeat;
+			mask: url('../../src/images/arrow.svg') center / contain no-repeat;
 			transition: transform var(--transition-base);
 		}
 	}

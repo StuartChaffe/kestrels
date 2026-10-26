@@ -93,8 +93,8 @@
 		--text-size-base: 1.25rem; // 20px
 		--text-size-s: 1.125rem; // 18px
 		--text-size-xs: 0.75rem; // 12px
-		--spacing-xxl: 140px;
-		--spacing-xl: 120px;
+		--spacing-xxl: 120px;
+		--spacing-xl: 80px;
 		--spacing-l: 50px;
 		--spacing: 30px;
 		--gap: var(--spacing);
@@ -111,7 +111,8 @@
 		--text-size-xl: 2rem; // H3
 		--text-size-l: 1.8rem; // H4
 		--text-size-m: 25px; // H5
-
+		--spacing-xxl: 140px;
+		--spacing-xl: 120px;
 		--wp--preset--font-size--small: var(--text-size-s);
 		--wp--preset--font-size--medium: var(--text-size-xl);
 		--wp--preset--font-size--large: var(--text-size-2xl);

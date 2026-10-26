@@ -1,75 +1,75 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code (and anyone else) working in this theme.
 
-## Project Overview
+## Project overview
 
-Origin is a WordPress starter theme using Vite 8 for asset compilation. It's designed for use with Laravel Valet.
+Custom WordPress theme for the Killamarsh Kestrels website. It started from the Origin starter theme by Marc Jenkins and uses Vite 8 for SCSS and JavaScript, with ACF Pro blocks for page content. Repository: `StuartChaffe/kestrels`.
 
-## Build Commands
+- The Git repository root is the WordPress install root. Only `wp-content/themes/kestrels` is tracked; WordPress core, uploads and plugins are ignored.
+- Required plugin: Advanced Custom Fields Pro. WP Migrate DB Pro is also installed.
+- Run every command below from `wp-content/themes/kestrels/`.
 
-All commands run from the theme directory (`wp-content/themes/origin/`):
+## Commands
 
 ```bash
-npm run watch         # Watch mode with BrowserSync live reload at localhost:3000
-npm run production    # Production build with minification and content-hashed filenames
-npm run development   # Development build (no watch, includes sourcemaps)
+npm install           # first time only (needs Node ^20.19.0 || >=22.12.0)
+npm run watch         # build on change, BrowserSync live reload at localhost:3000
+npm run development   # one-off build, unhashed filenames, source maps
+npm run production    # minified build with content-hashed filenames
 ```
 
-## Architecture
+Local setup: copy `.env-sample` to `.env` and set `VITE_PROXY`, `VITE_HOST` and the SSL paths (omit the two SSL lines for plain HTTP). `.env` is git-ignored; never commit it.
 
-### Directory Structure
+## Compiled assets
+
+`assets/` is build output and is git-ignored, so it never reaches the live site through Git. Run `npm run production` before deploying and confirm how the files get to the server. Edit `src/`, never `assets/`.
+
+Each build starts by clearing `assets/css`, `assets/js`, `assets/fonts` and `assets/images`, so renamed or deleted source files do not linger. In `npm run watch` this happens once at start-up, so restart it after renaming files. Dev builds leave unhashed files and source maps, so run a clean `npm run production` before any deploy.
+
+## Structure
 
 ```
-wp-content/themes/origin/
-├── src/
-│   ├── js/scripts.js           # JS entry point → assets/js/scripts-[hash].js
-│   ├── styles/styles.scss      # Main CSS entry → assets/css/styles-[hash].css
-│   └── styles/editor-style.scss # Block editor styles → assets/css/editor-style-[hash].css
-├── lib/                        # PHP modules (loaded by functions.php)
-│   ├── theme-setup.php         # Theme support, head cleanup
-│   ├── images.php              # Image sizes
-│   ├── enqueue.php             # Asset loading
-│   ├── gutenberg.php           # Block editor config
-│   ├── menus.php               # Menu registration
-│   ├── acf.php                 # ACF options pages, JSON sync
-│   ├── vendors.php             # Third-party integrations
-│   ├── helpers.php             # Utility functions
-│   └── env-indicator.php       # Staging/production admin indicator
-├── blocks/                     # ACF blocks (auto-registered)
-│   └── register.php            # Scans blocks/ subdirs and registers via block.json
-├── partials/                   # Reusable template parts
-├── acf-json/                   # ACF field group exports (auto-synced)
-└── assets/                     # Compiled output (do not edit directly)
+src/js/scripts.js            entry point, imports src/js/components/*
+src/js/editor.js             block editor script
+src/styles/styles.scss       front-end styles
+src/styles/editor-style.scss block editor styles
+lib/                         PHP modules, loaded by functions.php
+blocks/                      ACF blocks, one folder each (block.json, template, scss, acf-json)
+partials/                    template parts (header, footer, alert, analytics, social links)
+assets/                      compiled output (git-ignored)
 ```
 
-### Key Patterns
+Blocks: `accordion`, `content-block`, `image-gallery`, `page-header`, `page-links`. `blocks/register.php` registers every folder that has a `block.json`.
 
-- **Modular PHP**: `functions.php` loads feature files from `lib/`
-- **ACF Blocks**: Add `block.json` + template in `blocks/block-name/` for auto-registration
-- **Asset versioning**: Use `vite_asset('src/path/file.scss')` helper — reads `assets/.vite/manifest.json` and returns the hashed URL
-- **Block SCSS**: Add explicit `@import` to both `styles.scss` and `editor-style.scss` when adding a new block with styles (glob imports are not used)
-- **SVG icons**: Use `get_icon('name')` helper for sprite references
+## Conventions
 
-### SCSS Organization
+- Function prefix `kestrels_`, text domain `kestrels`.
+- Indentation is tabs, with 4 spaces for JSON (see `.editorconfig`).
+- Styles follow ITCSS order (settings, variables, utilities, base, layout, components, blocks). Block SCSS is picked up automatically by the `@import "../../blocks/*/*.scss"` glob in both `styles.scss` and `editor-style.scss`.
+- Assets are enqueued through `vite_asset()` and `vite_asset_css()`, which read `assets/.vite/manifest.json`.
+- New blocks: use the `/newblock` command. ACF field groups save into the block's own `acf-json/` folder.
+- Escape output at the point of use: `esc_html`, `esc_attr`, `esc_url`, `wp_kses_post` for rich text.
+- Fonts are self-hosted: files live in `src/fonts/` (SIL Open Font Licence, licences alongside), are declared in `src/styles/base/_fonts.scss` and are copied to `assets/fonts/` by the build. Latin subset only; add a subset and its `@font-face` if you need more characters. Regular DM Sans is preloaded in `lib/enqueue.php`; the other files load on demand.
+- Record notable changes in `CHANGELOG.md` (the `/changelog` command does this).
 
-ITCSS-inspired: settings → variables → utilities → base → components → layout → media
+## Templates and layout
 
-### JavaScript Components
+- Every template wraps its content in `<main id="content">`; the skip link in `header.php` points to `#content`.
+- `page.php` and `single.php` use `<main id="content" class="main--blocks">`. The `.main--blocks` rule in `src/styles/layout/_layout.scss` keeps blocks full width and constrains loose content, because the site's layout CSS targets direct children of `.global-container`.
+- Each page needs exactly one `<h1>`. On pages it comes from the Page Header block, and `page.php` adds none of its own, so a page without that block has no `<h1>`.
 
-ES6 modules in `src/js/components/` imported via `src/js/scripts.js`
+## Content that lives in the database
 
-## Dependencies
+The Theme Options page (alert banner, analytics embed code, social links, unsupported-browser notice) is created in `lib/acf.php`, but its field group is not saved in `acf-json/`. The fields exist only in the database, so a fresh install will not have them until the group is exported.
 
-- **Required**: Advanced Custom Fields Pro
-- **Optional**: Gravity Forms, site-functionality plugin (for CPTs), custom-blocks plugin
+## Known gaps
 
-## Environment Setup
-
-Requires Node.js `^20.19.0 || >=22.12.0` (Vite 8 requirement). Use Node 22 LTS recommended.
-
-1. `npm install`
-2. `cp .env-sample .env` and configure proxy/SSL paths
-3. `npm run watch`
-
-For non-SSL development, omit the `VITE_HTTPS_KEY` and `VITE_HTTPS_CERT` lines from `.env`.
+- The Content Block's allowed-blocks list names blocks that do not exist (`acf/team`, `acf/faqs`, `acf/logos` and others); only `acf/image-gallery` is built.
+- `sidebar.php` and `searchform.php` are not used by any template, and the `footer` menu location is registered but never output.
+- `lib/roles.php` gives editors Gravity Forms capabilities, but Gravity Forms is not installed.
+- Rich-text ACF fields (accordion body, alert text, browser notice) are echoed without `wp_kses_post`.
+- SVG uploads are allowed for administrators without sanitising.
+- `package-lock.json` is git-ignored, so installs are not reproducible.
+- On single posts the `<article>` is excluded from the container width rules, so check how long post content looks.
+- `style.css` version and the changelog are updated by hand.

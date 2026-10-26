@@ -26,7 +26,8 @@
 		// 	padding: 0 1rem;
 		// }
 	}
-	> h1 {
+	> h1,
+	> main > h1 {
 		margin: var(--spacing-xl) 0 var(--spacing-l) 0;
 	}
 
@@ -35,6 +36,39 @@
 	// to sit at the bottom of short pages.
 	> :not(section, header):has(+ .site-footer) {
 		margin-bottom: var(--spacing-xxl);
+	}
+}
+
+// <main> wrapper for block-built pages (page.php, single.php).
+// Adds the landmark and the skip-link target without changing the layout:
+// blocks stay full width, and loose content is constrained as it is in .global-container.
+.global-container > main.main--blocks {
+	display: flex;
+	flex-direction: column;
+	max-width: none;
+	padding: 0;
+	margin-bottom: 0;
+
+	> *:not(section, header, footer, article, iframe) {
+		max-width: var(--container-width-s);
+		margin-left: auto !important;
+		margin-right: auto !important;
+		width: 100%;
+		padding: 0 1.5rem;
+	}
+
+	> h1 {
+		margin: var(--spacing-xl) 0 var(--spacing-l) 0;
+	}
+
+	// Space loose content from the footer, as .global-container does.
+	> :not(section, header):last-child {
+		margin-bottom: var(--spacing-xxl);
+	}
+
+	// Block pages have no extra top margin on content blocks.
+	> .content-block {
+		margin-top: 0 !important;
 	}
 }
 

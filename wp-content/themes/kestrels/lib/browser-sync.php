@@ -9,7 +9,7 @@
  * (port 3000) is actually reachable, so it's a no-op when `npm run watch`
  * isn't running — safe to leave active on any environment.
  */
-function origin_browser_sync_snippet() {
+function kestrels_browser_sync_snippet() {
 	$host = wp_parse_url( home_url(), PHP_URL_HOST );
 	$port = 3000;
 
@@ -27,4 +27,4 @@ function origin_browser_sync_snippet() {
 		$port
 	);
 }
-add_action( 'wp_footer', 'origin_browser_sync_snippet', 99 );
+add_action( 'wp_footer', 'kestrels_browser_sync_snippet', 99 );

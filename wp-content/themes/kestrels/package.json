@@ -1,7 +1,7 @@
 {
-  "name": "origin",
+  "name": "kestrels",
   "version": "1.0.0",
-  "description": "WordPress boilerplate",
+  "description": "Custom WordPress theme for Killamarsh Kestrels",
   "directories": {
     "lib": "lib"
   },
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marcjenkins/origin.git"
+    "url": "git+https://github.com/StuartChaffe/kestrels.git"
   },
   "keywords": [],
   "author": "Marc Jenkins",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/marcjenkins/origin/issues"
+    "url": "https://github.com/StuartChaffe/kestrels/issues"
   },
-  "homepage": "https://github.com/marcjenkins/origin#readme",
+  "homepage": "https://github.com/StuartChaffe/kestrels#readme",
   "devDependencies": {
     "browser-sync": "^3.0.4",
     "sass": "^1.57.1",

@@ -13,7 +13,7 @@ if ($accordion) : ?>
             <h2 class="accordion__heading"><?php echo esc_html($title); ?></h2>
             <?php if ($show_all) : ?>
             <div class="block-heading__actions accordion__actions">
-                <button class="accordion__show-all btn" data-show="<?php esc_attr_e('Show all', 'origin'); ?>" data-close="<?php esc_attr_e('Close all', 'origin'); ?>"><?php _e('Show all', 'origin'); ?></button>
+                <button class="accordion__show-all btn" data-show="<?php esc_attr_e('Show all', 'kestrels'); ?>" data-close="<?php esc_attr_e('Close all', 'kestrels'); ?>"><?php _e('Show all', 'kestrels'); ?></button>
             </div>
             <?php endif; ?>
         </div>

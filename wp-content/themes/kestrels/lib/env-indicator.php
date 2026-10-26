@@ -10,7 +10,7 @@
 /**
  * Returns environment colour
  */
-function origin_get_environment_color( $env ) {
+function kestrels_get_environment_color( $env ) {
 	switch ( $env ) {
 		case 'local':
 		case 'development':
@@ -35,7 +35,7 @@ function origin_get_environment_color( $env ) {
 /**
  * Adds the environment menu item to the admin toolbar
  */
-function origin_admin_bar_menu( WP_Admin_Bar $wp_admin_bar ) {
+function kestrels_admin_bar_menu( WP_Admin_Bar $wp_admin_bar ) {
 	$env = wp_get_environment_type();
 
 	$wp_admin_bar->add_node( [
@@ -47,7 +47,7 @@ function origin_admin_bar_menu( WP_Admin_Bar $wp_admin_bar ) {
 		],
 	] );
 }
-add_action( 'admin_bar_menu', 'origin_admin_bar_menu', 1 );
+add_action( 'admin_bar_menu', 'kestrels_admin_bar_menu', 1 );
 
 
 
@@ -58,8 +58,8 @@ add_action( 'admin_bar_menu', 'origin_admin_bar_menu', 1 );
  *
  * @return void
  */
-function origin_indicator_head() {
-	$color = origin_get_environment_color( wp_get_environment_type() );
+function kestrels_indicator_head() {
+	$color = kestrels_get_environment_color( wp_get_environment_type() );
 	?>
 	<style type="text/css">
 		#wpadminbar .env-indicator .ab-item {
@@ -69,9 +69,9 @@ function origin_indicator_head() {
 	</style>
 	<?php
 }
-add_action( 'admin_head', 'origin_indicator_head' );
+add_action( 'admin_head', 'kestrels_indicator_head' );
 add_action( 'wp_head', function() {
     if ( is_admin_bar_showing() ) {
-        origin_indicator_head();
+        kestrels_indicator_head();
     }
 } );

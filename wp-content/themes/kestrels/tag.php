@@ -1,22 +1,24 @@
 <?php get_header(); ?>
 
+<main id="content">
+	<h1>Tag Archive</h1>
+
 <?php if ( have_posts() ): ?>
 
-<h2>Tag Archive</h2>
-
-<ol>
-<?php while ( have_posts() ) : the_post(); ?>
-	<li>
-			<h3><a href="<?php esc_url( the_permalink() ); ?>" title="Permalink to <?php the_title(); ?>"><?php the_title(); ?></a></h3>
+	<ol>
+	<?php while ( have_posts() ) : the_post(); ?>
+		<li>
+			<h2 class="heading-3"><a href="<?php echo esc_url( get_permalink() ); ?>" title="Permalink to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
 			<?php the_excerpt(); ?>
-	</li>
-<?php endwhile; ?>
-</ol>
+		</li>
+	<?php endwhile; ?>
+	</ol>
 
 <?php else: ?>
 
-<h2>No posts to display</h2>
+	<p>No posts to display</p>
 
 <?php endif; ?>
+</main>
 
 <?php get_footer(); ?>

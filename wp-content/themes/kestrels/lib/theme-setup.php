@@ -3,13 +3,14 @@
 /**
  * Add theme support
  */
-function origin_theme_setup() {
+function kestrels_theme_setup() {
     add_theme_support( 'title-tag' );
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'script', 'style' ) );
     add_theme_support( 'disable-layout-styles' );
+    add_post_type_support( 'page', 'excerpt' );
 }
-add_action( 'after_setup_theme', 'origin_theme_setup' );
+add_action( 'after_setup_theme', 'kestrels_theme_setup' );
 
 
 
@@ -77,31 +78,31 @@ add_filter( 'xmlrpc_enabled', '__return_false' );
 /**
  * Strip version strings from enqueued asset URLs
  */
-function origin_remove_version_strings( $src ) {
+function kestrels_remove_version_strings( $src ) {
     if ( ! is_admin() ) {
         $src = remove_query_arg( 'ver', $src );
     }
     return $src;
 }
-add_filter( 'script_loader_src', 'origin_remove_version_strings' );
-add_filter( 'style_loader_src', 'origin_remove_version_strings' );
+add_filter( 'script_loader_src', 'kestrels_remove_version_strings' );
+add_filter( 'style_loader_src', 'kestrels_remove_version_strings' );
 
 
 
 /**
  * Add no-js class to body
  */
-function origin_no_js_body_classes( $classes ) {
+function kestrels_no_js_body_classes( $classes ) {
     return array_merge( $classes, array( 'no-js' ) );
 }
-add_filter( 'body_class', 'origin_no_js_body_classes', 20 );
+add_filter( 'body_class', 'kestrels_no_js_body_classes', 20 );
 
 
 
 /**
  * Tidy up body classes
  */
-function origin_clean_body_classes( $classes ) {
+function kestrels_clean_body_classes( $classes ) {
     $allowed_classes = [
         'single',
         'page',
@@ -111,4 +112,4 @@ function origin_clean_body_classes( $classes ) {
     ];
     return array_intersect( $classes, $allowed_classes );
 }
-add_filter( 'body_class', 'origin_clean_body_classes', 20 );
+add_filter( 'body_class', 'kestrels_clean_body_classes', 20 );

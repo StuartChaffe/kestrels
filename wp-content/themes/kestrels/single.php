@@ -1,13 +1,15 @@
 <?php get_header(); ?>
 
+<main id="content" class="main--blocks">
 <?php while ( have_posts() ) : the_post(); ?>
 
-	<article id="content">
-		<h2><?php the_title(); ?></h2>
-		<time datetime="<?php the_time( 'Y-m-d' ); ?>" pubdate><?php the_date(); ?> <?php the_time(); ?></time>
+	<article>
+		<h1><?php the_title(); ?></h1>
+		<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() . ' ' . get_the_time() ); ?></time>
 		<?php the_content(); ?>
 	</article>
 
 <?php endwhile; ?>
+</main>
 
 <?php get_footer(); ?>

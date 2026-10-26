@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## 2026-10-26
+
+### Added
+- `.main--blocks` rule in `_layout.scss` — a `<main>` wrapper for block-built pages that adds the landmark without changing layout (rebuild assets to apply)
+- Self-hosted fonts: DM Sans (variable, with optical size) and Instrument Serif in `src/fonts/`, declared in `src/styles/base/_fonts.scss`, with their licences
+- `kestrels_preload_fonts()` in `lib/enqueue.php` — preloads regular DM Sans in the `<head>`
+
+### Changed
+- Renamed the starter to Kestrels: theme name, package name, `origin_` function prefix and `'origin'` text domain are now `kestrels`; `.env-sample` and repository links updated
+- `CLAUDE.md` and `README.md` rewritten for this project, including known gaps and deployment notes
+- `.claude/commands/newblock.md` — WYSIWYG output now uses `wp_kses_post`
+
+### Removed
+- Google Fonts `<link>` tags from `header.php` — the site no longer makes requests to Google for fonts
+
+### Fixed
+- Builds now clear `assets/fonts` and `assets/images` as well as `css` and `js`, so renamed fonts and images no longer pile up in `assets/`
+- Skip link has a target on every template: `page.php`, `single.php`, archives, search and 404 now wrap content in `<main id="content">`
+- One `<h1>` per template: pages still get theirs from the Page Header block, and post titles in lists are `h2`
+- `esc_url( the_permalink() )` replaced with `esc_url( get_permalink() )`, and title attributes use `the_title_attribute()`
+- Single post date uses `get_the_date()` and drops the obsolete `pubdate` attribute
+
 ## 2026-05-15
 
 ### Added

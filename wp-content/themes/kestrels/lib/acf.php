@@ -31,7 +31,7 @@ add_filter('acf/settings/load_json', function ($paths) {
  * ACF JSON: save block field groups into their block folder, everything else into acf-json/
  */
 add_action('acf/update_field_group', function ($group) {
-	$slug = _origin_block_slug_for_group( $group );
+	$slug = _kestrels_block_slug_for_group( $group );
 	if ( ! $slug ) return;
 
 	$path = get_stylesheet_directory() . '/blocks/' . $slug . '/acf-json';
@@ -46,7 +46,7 @@ add_filter('acf/settings/save_json', function ($path) {
 	return get_stylesheet_directory() . '/acf-json';
 });
 
-function _origin_block_slug_for_group( $group ) {
+function _kestrels_block_slug_for_group( $group ) {
 	foreach ( $group['location'] ?? [] as $rules ) {
 		foreach ( $rules as $rule ) {
 			if ( $rule['param'] === 'block' && $rule['operator'] === '==' ) {

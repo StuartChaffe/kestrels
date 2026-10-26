@@ -109,7 +109,7 @@ export default defineConfig(({ mode }) => {
 
     return {
         plugins: [
-            cleanBuildDirs(['css', 'js']),
+            cleanBuildDirs(['css', 'js', 'fonts', 'images']),
             sassGlob(),
             fixCssAssetPaths(),
             copyStatic(['fonts', 'images']),

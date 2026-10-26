@@ -31,7 +31,7 @@ Create a new ACF block in this WordPress theme.
 - Escaping rules by type:
   - text: `esc_html($var)`
   - textarea: `wp_kses_post($var)` (outputs with wpautop formatting)
-  - wysiwyg: `echo $var` (ACF already sanitises WYSIWYG output)
+  - wysiwyg: `echo wp_kses_post($var)` (ACF does not sanitise WYSIWYG output)
   - link: `esc_url($var['url'])`, `esc_html($var['title'])`, `esc_attr($var['target'])` — link fields return arrays; render as `<a>` with a null-safe target check
   - image: render as `<img>` using `$var['url']`, `$var['alt']`, `$var['width']`, `$var['height']`
   - true_false: use as a boolean condition only, no output

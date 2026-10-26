@@ -29,6 +29,14 @@ p.has-small-font-size {
 	font-size: var(--text-size-s) !important;
 	line-height: var(--leading-base);
 }
+
+::-moz-selection { /* Code for Firefox */
+  background: #E0CD00;
+}
+
+::selection {
+  background: #E0CD00;
+}
 ul,
 ol {
 	// list-style: none;

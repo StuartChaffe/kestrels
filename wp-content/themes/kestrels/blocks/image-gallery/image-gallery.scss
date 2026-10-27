@@ -11,14 +11,6 @@
 	&__title {
 		margin-bottom: var(--spacing-l);
 	}
-	&__slide {
-		// margin-right: 0px;
-		// @include mq(medium) {
-		// 	margin-right: 16px;
-		// }
-	}
-
-
 	&__swiper {
 		--gallery-gap: 0px;
 		--gallery-peek: 0px;

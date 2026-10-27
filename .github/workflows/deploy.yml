@@ -1,0 +1,108 @@
+name: Deploy theme
+
+# Pushes to main deploy to staging automatically.
+# To deploy to production, run this workflow by hand (Actions tab > Deploy theme > Run workflow)
+# and choose "production".
+# SSH on Krystal uses port 722. Set the DEPLOY_PORT secret to override it.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Where to deploy
+        type: choice
+        options:
+          - staging
+          - production
+        default: staging
+
+# Never run two deploys to the same place at once, and never cancel one half way.
+concurrency:
+  group: deploy-${{ github.event_name == 'workflow_dispatch' && inputs.target || 'staging' }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Secrets are stored per environment (Settings > Environments), so staging and production can differ.
+    environment: ${{ github.event_name == 'workflow_dispatch' && inputs.target || 'staging' }}
+    env:
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+      DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+      DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+    defaults:
+      run:
+        working-directory: wp-content/themes/kestrels
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: wp-content/themes/kestrels/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build assets
+        run: npm run production
+
+      - name: Check deploy settings
+        run: |
+          for v in DEPLOY_HOST DEPLOY_USER DEPLOY_PATH DEPLOY_KEY DEPLOY_KNOWN_HOSTS; do
+            if [ -z "${!v}" ]; then
+              echo "::error::Missing secret $v in this environment"
+              exit 1
+            fi
+          done
+          case "$DEPLOY_PATH" in
+            */wp-content/themes/*) ;;
+            *) echo "::error::DEPLOY_PATH must be the theme folder, inside wp-content/themes"; exit 1 ;;
+          esac
+
+      - name: Set up SSH
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      # Fail early, with a clear message, if the login or rsync on the server does not work.
+      - name: Check the server connection
+        run: |
+          ssh -i "$HOME/.ssh/deploy_key" -p "${DEPLOY_PORT:-722}" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "rsync --version | head -1 && test -d '$DEPLOY_PATH'" \
+            || { echo "::error::Could not log in, rsync is missing on the server, or DEPLOY_PATH does not exist"; exit 1; }
+
+      # 1. Add the new built files first, so the pages never point at files that are not there yet.
+      - name: Upload built assets
+        run: |
+          rsync -rltz --chmod=D755,F644 \
+            -e "ssh -i $HOME/.ssh/deploy_key -p ${DEPLOY_PORT:-722} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            assets/ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/assets/"
+
+      # 2. Upload the theme. Nothing is deleted here, so files that exist only on the server are kept.
+      - name: Upload theme files
+        run: |
+          rsync -rltz --chmod=D755,F644 \
+            --exclude='/assets/' --exclude='/node_modules/' --exclude='.git*' --exclude='.github' \
+            --exclude='.claude' --exclude='.env*' --exclude='.DS_Store' \
+            -e "ssh -i $HOME/.ssh/deploy_key -p ${DEPLOY_PORT:-722} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            ./ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/"
+
+      # 3. Remove old built files. This is the only place anything is deleted.
+      - name: Remove old built assets
+        run: |
+          rsync -rltz --delete --chmod=D755,F644 \
+            -e "ssh -i $HOME/.ssh/deploy_key -p ${DEPLOY_PORT:-722} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            assets/ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/assets/"

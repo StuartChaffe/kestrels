@@ -32,8 +32,11 @@
 		border-radius: var(--radius);
 		color: var(--color-text-reversed);
 		text-decoration: none;
-		padding: var(--spacing-s);
+		padding: var(--spacing-xs);
 		transition: background-color var(--transition-base);
+		@include mq(medium) {
+			padding: var(--spacing-s);
+		}
 
 		&:is(a):hover {
 			color: var(--color-text-reversed);

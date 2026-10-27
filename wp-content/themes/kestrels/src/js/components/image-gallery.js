@@ -36,7 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		const swiper = new Swiper(el, {
 			slidesPerView: 'auto', // slide width comes from each image's aspect ratio
-			spaceBetween: 16, // keep in sync with --gallery-gap in image-gallery.scss
+			spaceBetween: 10, // keep in sync with --gallery-gap in image-gallery.scss
+			breakpoints: {
+				800: { spaceBetween: 15 }, // the 'medium' breakpoint (50em)
+			},
 			centeredSlides: true, // keep the focused image in the middle, with the neighbours either side
 			loop: true, // carry on from the last image back to the first
 			slideToClickedSlide: true, // click a peeking image to bring it into view

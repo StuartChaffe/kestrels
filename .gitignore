@@ -2,6 +2,7 @@
 /*
 !.gitignore
 !.editorconfig
+!.github/
 !wp-content/
 
 .claude/settings.local.json
@@ -33,7 +34,6 @@ node_modules
 *.bak
 Thumbs.db
 .nova
-package-lock.json
 yarn.lock
 
 # Favicons

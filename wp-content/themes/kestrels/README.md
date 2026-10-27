@@ -27,7 +27,31 @@ BrowserSync proxies your local site and reloads on PHP, CSS and JS changes. Open
 
 ## Deploying
 
-The compiled `assets/` folder is not in Git. Run `npm run production` and make sure the built files reach the server with the theme. Remove old dev builds first so stale files are not deployed.
+GitHub builds and deploys the theme with the workflow in `.github/workflows/deploy.yml`.
+
+- A push to `main` deploys to **staging** automatically.
+- To deploy to **production**, open the Actions tab, choose "Deploy theme", click "Run workflow" and pick `production`.
+
+Each run installs dependencies, runs `npm run production`, then copies the theme to the server over SSH with `rsync`. It adds and updates theme files but deletes nothing except old built files in `assets/`, so files that exist only on the server (such as field groups saved there) are kept. `.env`, `node_modules`, `.git` and `.claude` are never uploaded.
+
+### One-off setup
+
+1. Create a dedicated key: `ssh-keygen -t ed25519 -f kestrels_deploy -C "github-deploy"`. Authorise the public key (`kestrels_deploy.pub`) on the server, then keep the private key out of the project folder.
+2. In GitHub, go to Settings > Environments and create `staging` and `production`. For production, consider adding yourself as a required reviewer.
+3. In each environment add these secrets:
+
+| Secret | Value |
+|---|---|
+| `DEPLOY_HOST` | The server's hostname |
+| `DEPLOY_USER` | The SSH username |
+| `DEPLOY_PATH` | Full path to the theme folder on that server, ending in `/wp-content/themes/kestrels` |
+| `DEPLOY_KEY` | The whole private key, including the begin and end lines |
+| `DEPLOY_KNOWN_HOSTS` | Output of `ssh-keyscan -p 722 your-host` (check the fingerprint with your host) |
+| `DEPLOY_PORT` | Optional. Defaults to 722, which is what Krystal uses |
+
+4. Run the workflow once to staging and check the site before using production.
+
+If the "Check the server connection" step fails, the login failed, `rsync` is not available in the server's shell, or `DEPLOY_PATH` is wrong.
 
 ## Notes
 

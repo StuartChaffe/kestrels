@@ -23,9 +23,9 @@ Local setup: copy `.env-sample` to `.env` and set `VITE_PROXY`, `VITE_HOST` and 
 
 ## Compiled assets
 
-`assets/` is build output and is git-ignored, so it never reaches the live site through Git. Run `npm run production` before deploying and confirm how the files get to the server. Edit `src/`, never `assets/`.
+`assets/` is build output and is git-ignored, so it never reaches a server through Git. GitHub Actions builds it and deploys the theme (see `README.md` > Deploying): a push to `main` goes to staging, and production is a manual run. Edit `src/`, never `assets/`.
 
-Each build starts by clearing `assets/css`, `assets/js`, `assets/fonts` and `assets/images`, so renamed or deleted source files do not linger. In `npm run watch` this happens once at start-up, so restart it after renaming files. Dev builds leave unhashed files and source maps, so run a clean `npm run production` before any deploy.
+Each build starts by clearing `assets/css`, `assets/js`, `assets/fonts` and `assets/images`, so renamed or deleted source files do not linger. In `npm run watch` this happens once at start-up, so restart it after renaming files. Dev builds leave unhashed files and source maps. Deploys always run a fresh `npm run production`.
 
 ## Structure
 
@@ -51,6 +51,7 @@ Blocks: `accordion`, `content-block`, `image-gallery`, `page-header`, `page-link
 - New blocks: use the `/newblock` command. ACF field groups save into the block's own `acf-json/` folder.
 - Escape output at the point of use: `esc_html`, `esc_attr`, `esc_url`, `wp_kses_post` for rich text.
 - Fonts are self-hosted: files live in `src/fonts/` (SIL Open Font Licence, licences alongside), are declared in `src/styles/base/_fonts.scss` and are copied to `assets/fonts/` by the build. Latin subset only; add a subset and its `@font-face` if you need more characters. Regular DM Sans is preloaded in `lib/enqueue.php`; the other files load on demand.
+- Commit `package-lock.json`: the deploy workflow uses `npm ci`, which needs it.
 - Record notable changes in `CHANGELOG.md` (the `/changelog` command does this).
 
 ## Templates and layout
@@ -70,6 +71,5 @@ The Theme Options page (alert banner, analytics embed code, social links, unsupp
 - `lib/roles.php` gives editors Gravity Forms capabilities, but Gravity Forms is not installed.
 - Rich-text ACF fields (accordion body, alert text, browser notice) are echoed without `wp_kses_post`.
 - SVG uploads are allowed for administrators without sanitising.
-- `package-lock.json` is git-ignored, so installs are not reproducible.
 - On single posts the `<article>` is excluded from the container width rules, so check how long post content looks.
 - `style.css` version and the changelog are updated by hand.

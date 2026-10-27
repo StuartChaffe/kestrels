@@ -9,11 +9,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - `.main--blocks` rule in `_layout.scss` — a `<main>` wrapper for block-built pages that adds the landmark without changing layout (rebuild assets to apply)
 - Self-hosted fonts: DM Sans (variable, with optical size) and Instrument Serif in `src/fonts/`, declared in `src/styles/base/_fonts.scss`, with their licences
 - `kestrels_preload_fonts()` in `lib/enqueue.php` — preloads regular DM Sans in the `<head>`
+- GitHub Actions deploy workflow (`.github/workflows/deploy.yml`): builds on every push to `main`, deploys to staging automatically and to production by manual run, using `rsync` over SSH
 
 ### Changed
 - Renamed the starter to Kestrels: theme name, package name, `origin_` function prefix and `'origin'` text domain are now `kestrels`; `.env-sample` and repository links updated
 - `CLAUDE.md` and `README.md` rewritten for this project, including known gaps and deployment notes
 - `.claude/commands/newblock.md` — WYSIWYG output now uses `wp_kses_post`
+- `package-lock.json` is now tracked and the root `.gitignore` allows `.github/`, both needed by the deploy workflow
 
 ### Removed
 - Google Fonts `<link>` tags from `header.php` — the site no longer makes requests to Google for fonts

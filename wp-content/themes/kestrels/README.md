@@ -36,9 +36,9 @@ Each run installs dependencies, runs `npm run production`, then copies the theme
 
 ### One-off setup
 
-1. Create a dedicated key: `ssh-keygen -t ed25519 -f kestrels_deploy -C "github-deploy"`. Authorise the public key (`kestrels_deploy.pub`) on the server, then keep the private key out of the project folder.
+1. Create a dedicated key: `ssh-keygen -t ed25519 -f ~/.ssh/kestrels_deploy -C "github-deploy"`. Authorise the public key (`kestrels_deploy.pub`) on the server, then keep the private key out of the project folder. On Krystal, SSH shell access has to be enabled for the account first (Client Area, or ask support), and the key is imported and authorised in cPanel under Security > SSH Access.
 2. In GitHub, go to Settings > Environments and create `staging` and `production`. For production, consider adding yourself as a required reviewer.
-3. In each environment add these secrets:
+3. In each environment add these as **six separate secrets**. Each one has its own name and its own value, so don't paste them together into one secret. Use Environment secrets (not Repository secrets, and not Variables):
 
 | Secret | Value |
 |---|---|
@@ -51,7 +51,7 @@ Each run installs dependencies, runs `npm run production`, then copies the theme
 
 4. Run the workflow once to staging and check the site before using production.
 
-If the "Check the server connection" step fails, the login failed, `rsync` is not available in the server's shell, or `DEPLOY_PATH` is wrong.
+If the "Check deploy settings" step says `Missing secret DEPLOY_HOST in this environment`, the secret is missing or empty in the environment the run used. Check the names exactly, and that they are Environment secrets in an environment called `staging` or `production`. If "Check the server connection" fails, the login failed, `rsync` is not available in the server's shell, or `DEPLOY_PATH` is wrong. If it says `Shell access is not enabled`, ask the host to enable it.
 
 ## Notes
 

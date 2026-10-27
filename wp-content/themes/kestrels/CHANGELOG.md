@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - `CLAUDE.md` and `README.md` rewritten for this project, including known gaps and deployment notes
 - `.claude/commands/newblock.md` — WYSIWYG output now uses `wp_kses_post`
 - `package-lock.json` is now tracked and the root `.gitignore` allows `.github/`, both needed by the deploy workflow
+- `README.md` deployment setup now says to add six separate environment secrets, covers enabling SSH on Krystal, and lists the common deploy errors
 
 ### Removed
 - Google Fonts `<link>` tags from `header.php` — the site no longer makes requests to Google for fonts
